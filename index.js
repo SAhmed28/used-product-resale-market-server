@@ -26,6 +26,15 @@ async function run(){
             res.send(users);
         });
 
+        // get user
+        app.get('/users/role/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email }
+            const user = await usersCollection.findOne(query);
+            res.send(user);
+        })
+
+
         app.post('/users', async (req,res) => {
             const user = req.body;
             const result = await usersCollection.insertOne(user);
