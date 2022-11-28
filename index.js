@@ -50,6 +50,17 @@ async function run(){
             const categoryProducts = await productsCollection.find(query).toArray();
             console.log(categoryProducts);
             res.send(categoryProducts);
+        });
+
+        app.get('/products', async(req,res) => {
+            let query = {};
+            if(req.query.email){
+                query = {
+                    email: req.query.email
+                }
+            }
+            const products = await productsCollection.find(query).toArray();
+            res.send(products);
         })
 
         app.post('/products', async (req,res) => {
